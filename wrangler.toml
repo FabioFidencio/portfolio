@@ -1,3 +1,5 @@
+# Cloudflare Workers static-assets deployment.
+# Build with `npm run build`, then deploy with `npm run deploy`.
 name = "portfolio"
 compatibility_date = "2026-11-10"
 

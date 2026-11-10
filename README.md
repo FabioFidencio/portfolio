@@ -26,6 +26,19 @@ npm run build   # production build in dist/home-page
 npm test        # unit tests
 ```
 
+## Deploy
+
+The project is configured for Cloudflare Workers static assets in `wrangler.toml`.
+
+```bash
+npm run build     # produces dist/home-page/browser
+npm run preview   # build and preview with Wrangler locally
+npm run deploy    # build and deploy manually with Wrangler
+```
+
+For Cloudflare Workers Builds, use `npm run build` as the build command and
+`npx wrangler deploy` as the deploy command.
+
 ## Where to edit content
 
 Personal details live in `src/app/portfolio.data.ts`:

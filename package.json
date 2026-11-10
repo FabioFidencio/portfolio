@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "preview": "ng build && wrangler dev",
+    "deploy": "ng build && wrangler deploy"
   },
   "private": true,
   "packageManager": "npm@11.13.0",
@@ -25,7 +27,8 @@
     "@angular/cli": "^22.2.6",
     "@angular/compiler-cli": "^22.2.0",
     "prettier": "^3.8.1",
-    "typescript": "~6.0.2"
+    "typescript": "~6.0.2",
+    "wrangler": "^4.160.0"
   },
   "description": "This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.6.",
   "main": "index.js",
