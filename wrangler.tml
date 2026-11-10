@@ -2,5 +2,5 @@ name = "portfolio"
 compatibility_date = "2026-11-10"
 
 [assets]
-directory = "./dist/portfolio/browser"
+directory = "./dist/home-page/browser"
 not_found_handling = "single-page-application"
