@@ -1,6 +1,12 @@
 export type Language = 'en' | 'pt-BR';
-export type NavSection = 'work' | 'skills' | 'engineering' | 'design' | 'experience';
-export type SkillCategory = 'framework' | 'language' | 'craft' | 'quality';
+export type NavSection =
+  | 'work'
+  | 'skills'
+  | 'engineering'
+  | 'analytics'
+  | 'design'
+  | 'experience';
+export type SkillCategory = 'framework' | 'language' | 'craft' | 'quality' | 'data' | 'ai';
 export type SkillFilter = 'all' | SkillCategory;
 export type SpecimenTab = 'foundations' | 'components' | 'motion';
 export type FeatureId = 'signals' | 'control-flow' | 'accessibility' | 'performance';
@@ -90,9 +96,19 @@ export interface DeployRow {
 export const profile = {
   name: 'Fábio Fidencio',
   shortName: 'Fábio',
+  initials: 'FF',
   email: 'fabio.augusto.az@gmail.com',
   github: 'https://github.com/FabioFidencio',
   linkedin: 'https://www.linkedin.com/in/fabio-fidencio/',
+};
+
+/* -----------------------------------------------------------------------
+ * EDIT ME: résumé download. Drop the PDF in public/resume/ (or paste a
+ * hosted URL) and update the file name used for the download.
+ * ----------------------------------------------------------------------- */
+export const resume = {
+  href: 'resume/fabio-fidencio-resume.pdf',
+  fileName: 'Fabio-Fidencio-Resume.pdf',
 };
 
 export const chartBars = [42, 58, 50, 74, 66, 82, 71];

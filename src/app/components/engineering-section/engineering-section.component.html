@@ -1,0 +1,100 @@
+<section id="engineering" class="band" aria-labelledby="engineering-heading">
+  <div class="container section-pad">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">
+          {{ content().engineering.eyebrow }}
+          <span class="index">{{ content().engineering.index }}</span>
+        </p>
+        <h2 id="engineering-heading">
+          {{ content().engineering.heading }}
+          <span>{{ content().engineering.headingMuted }}</span>
+        </h2>
+      </div>
+      <p class="section-lede">{{ content().engineering.lede }}</p>
+    </div>
+
+    <div class="eng-grid">
+      <div
+        class="feature-tabs"
+        role="tablist"
+        [attr.aria-label]="content().engineering.tabsAria"
+        aria-orientation="vertical"
+      >
+        @for (feature of features(); track feature.id; let i = $index) {
+          <button
+            class="feature-tab"
+            type="button"
+            role="tab"
+            [id]="'feature-tab-' + feature.id"
+            [attr.aria-selected]="selectedFeature().id === feature.id"
+            aria-controls="feature-panel"
+            (click)="selectFeature(feature)"
+          >
+            <span class="feature-num">0{{ i + 1 }}</span>
+            <span class="feature-tab-copy">
+              <strong>{{ feature.label }}</strong>
+              <span>{{ feature.title }}</span>
+            </span>
+            <span class="feature-arrow" aria-hidden="true">→</span>
+          </button>
+        }
+      </div>
+
+      <div
+        class="code-panel"
+        id="feature-panel"
+        role="tabpanel"
+        [attr.aria-labelledby]="'feature-tab-' + selectedFeature().id"
+      >
+        <div class="code-head">
+          <span class="code-file">{{ selectedFeature().file }}</span>
+          <span class="badge">{{ selectedFeature().language }}</span>
+        </div>
+        <div class="code-body">
+          <p class="code-desc">{{ selectedFeature().description }}</p>
+          <div class="code-block">
+            @for (line of selectedFeature().code; track $index) {
+              <div class="code-line">
+                <span class="line-no" aria-hidden="true">{{ $index + 1 }}</span>
+                <span class="line-text">
+                  @for (token of line; track $index) {
+                    <span [class]="'tok-' + (token.tone || 'plain')">{{ token.text }}</span>
+                  }
+                </span>
+              </div>
+            }
+          </div>
+          <ul class="feature-points">
+            @for (point of selectedFeature().bullets; track point) {
+              <li>{{ point }}</li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="arch-grid">
+      @for (card of content().engineering.architecture; track card.title) {
+        <article class="arch-card">
+          <span class="arch-icon" aria-hidden="true">{{ card.icon }}</span>
+          <h3>{{ card.title }}</h3>
+          <p>{{ card.body }}</p>
+          <code>{{ card.token }}</code>
+        </article>
+      }
+    </div>
+
+    <div class="principles">
+      <p class="eyebrow">{{ content().engineering.howIWork }}</p>
+      <div class="principles-grid">
+        @for (principle of content().engineering.principles; track principle.title) {
+          <article>
+            <h3>{{ principle.title }}</h3>
+            <p>{{ principle.body }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </div>
+</section>

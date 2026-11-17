@@ -1,0 +1,211 @@
+<section id="work" class="section" aria-labelledby="work-heading">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">
+          {{ content().work.eyebrow }}
+          <span class="index">{{ content().work.index }}</span>
+        </p>
+        <h2 id="work-heading">
+          {{ content().work.heading }} <span>{{ content().work.headingMuted }}</span>
+        </h2>
+      </div>
+      <p class="section-lede">{{ content().work.lede }}</p>
+    </div>
+
+    <article class="featured-project card">
+      <div class="project-visual featured-visual">
+        <div class="stock-stage" aria-hidden="true">
+          <div class="phone">
+            <div class="phone-top"><span>9:41</span><span class="phone-signal">●●●</span></div>
+            <div class="stock-head">
+              <div>
+                <span class="stock-greeting">{{ content().mockups.stockmanager.greeting }}</span>
+                <strong>{{ content().mockups.stockmanager.title }}</strong>
+              </div>
+              <span class="stock-avatar">{{ content().mockups.stockmanager.avatar }}</span>
+            </div>
+            <div class="stock-summary">
+              @for (item of content().mockups.stockmanager.summary; track item.label) {
+                <div [class]="'stock-stat tone-' + item.tone">
+                  <strong>{{ item.value }}</strong>
+                  <span>{{ item.label }}</span>
+                </div>
+              }
+            </div>
+            <div class="stock-search">
+              <span class="stock-search-icon" aria-hidden="true">⌕</span
+              >{{ content().mockups.stockmanager.search }}
+            </div>
+            <div class="stock-list-head">
+              <span>{{ content().mockups.stockmanager.productsLabel }}</span>
+              <span>{{ content().mockups.stockmanager.filter }}</span>
+            </div>
+            <div class="stock-products">
+              @for (product of content().mockups.stockmanager.products; track product.name) {
+                <div class="stock-product">
+                  <span class="stock-thumb"></span>
+                  <div class="stock-product-copy">
+                    <strong>{{ product.name }}</strong>
+                    <span>{{ product.code }}</span>
+                  </div>
+                  <span [class]="'stock-pill stock-pill-' + product.tone">{{ product.stock }}</span>
+                </div>
+              }
+            </div>
+            <div class="phone-tabs">
+              @for (tab of content().mockups.stockmanager.tabs; track tab; let i = $index) {
+                <span [class.is-active]="i === 0">{{ tab }}</span>
+              }
+            </div>
+          </div>
+          <div class="stock-float">
+            <span class="stock-float-label">{{
+              content().mockups.stockmanager.movementLabel
+            }}</span>
+            <strong>{{ content().mockups.stockmanager.movementTitle }}</strong>
+            <span>{{ content().mockups.stockmanager.movementMeta }}</span>
+          </div>
+        </div>
+        <span class="visual-label">01 / {{ featuredProject().name }}</span>
+      </div>
+
+      <div class="featured-info">
+        <div class="project-meta">
+          <span class="badge">{{ featuredProject().type }}</span>
+          <span>{{ featuredProject().year }}</span>
+          <span>{{ featuredProject().role }}</span>
+        </div>
+        <h3>
+          {{ featuredProject().name }} <span>{{ featuredProject().subtitle }}</span>
+        </h3>
+        <p>{{ featuredProject().summary }}</p>
+        <dl class="result-list">
+          @for (result of featuredProject().results; track result.label) {
+            <div>
+              <dt>{{ result.value }}</dt>
+              <dd>{{ result.label }}</dd>
+            </div>
+          }
+        </dl>
+        <div class="tag-list">
+          @for (tag of featuredProject().stack; track tag) {
+            <span>{{ tag }}</span>
+          }
+        </div>
+        <div class="project-actions">
+          <button
+            class="btn btn-secondary project-btn"
+            type="button"
+            (click)="openProject(featuredProject())"
+          >
+            {{ content().work.readCase }} <span aria-hidden="true">→</span>
+          </button>
+          <a
+            class="btn btn-tertiary project-repo"
+            [href]="featuredProject().url"
+            target="_blank"
+            rel="noopener noreferrer"
+            (click)="trackRepo(featuredProject())"
+          >
+            {{ content().work.viewRepo }} <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <div class="project-grid" [class.is-single]="secondaryProjects().length === 1">
+      @for (project of secondaryProjects(); track project.id) {
+        <article class="project-card card">
+          <div class="project-visual">
+            @switch (project.id) {
+              @case ('cookin-up') {
+                <div class="shot shot-cookin" aria-hidden="true">
+                  <div class="shot-bar">
+                    <div class="window-dots"><i></i><i></i><i></i></div>
+                    <span>{{ content().mockups.cookinUp.url }}</span>
+                    <span class="shot-badge">{{ content().mockups.cookinUp.badge }}</span>
+                  </div>
+                  <div class="cookin-body">
+                    <div class="cookin-top">
+                      <span class="cookin-brand">{{ content().mockups.cookinUp.brand }}</span>
+                      <span>{{ content().mockups.cookinUp.nav }}</span>
+                    </div>
+                    <p class="cookin-kicker">{{ content().mockups.cookinUp.kicker }}</p>
+                    <p class="cookin-title">{{ content().mockups.cookinUp.title }}</p>
+                    <div class="cookin-chips">
+                      @for (
+                        ingredient of content().mockups.cookinUp.ingredients;
+                        track ingredient;
+                        let i = $index
+                      ) {
+                        <span [class.is-selected]="i < 3">{{ ingredient }}</span>
+                      }
+                    </div>
+                    <span class="cookin-cta"
+                      >{{ content().mockups.cookinUp.cta }}
+                      <span aria-hidden="true">→</span></span
+                    >
+                    <div class="cookin-results">
+                      <span class="cookin-results-label">{{
+                        content().mockups.cookinUp.resultsLabel
+                      }}</span>
+                      @for (recipe of content().mockups.cookinUp.recipes; track recipe.name) {
+                        <div class="recipe-row">
+                          <span class="recipe-art"></span>
+                          <div>
+                            <strong>{{ recipe.name }}</strong>
+                            <span>{{ recipe.meta }}</span>
+                          </div>
+                        </div>
+                      }
+                    </div>
+                  </div>
+                </div>
+              }
+            }
+            <span class="visual-label">0{{ $index + 2 }} / {{ project.name }}</span>
+          </div>
+
+          <div class="project-card-info">
+            <div class="project-meta">
+              <span class="badge">{{ project.type }}</span
+              ><span>{{ project.year }}</span>
+            </div>
+            <h3>
+              {{ project.name }} <span>{{ project.subtitle }}</span>
+            </h3>
+            <p>{{ project.summary }}</p>
+            <div class="tag-list">
+              @for (tag of project.stack; track tag) {
+                <span>{{ tag }}</span>
+              }
+            </div>
+            <div class="project-actions">
+              <button
+                class="btn btn-secondary project-btn"
+                type="button"
+                (click)="openProject(project)"
+              >
+                {{ content().work.readCase }} <span aria-hidden="true">→</span>
+              </button>
+              <a
+                class="btn btn-tertiary project-repo"
+                [href]="project.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                (click)="trackRepo(project)"
+              >
+                {{ content().work.viewRepo }} <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+
+  @if (selectedProject(); as project) {
+    <app-project-modal [project]="project" (closed)="closeProject()" />
+  }
+</section>

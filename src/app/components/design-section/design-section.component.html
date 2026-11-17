@@ -1,0 +1,146 @@
+<section id="design" class="section design" aria-labelledby="design-heading">
+  <div class="container design-grid">
+    <div class="design-copy">
+      <p class="eyebrow">{{ content().design.eyebrow }}</p>
+      <h2 id="design-heading">
+        {{ content().design.heading }} <span>{{ content().design.headingMuted }}</span>
+      </h2>
+      <p>{{ content().design.body }}</p>
+      <ul class="token-list">
+        @for (token of content().design.tokens; track token.label) {
+          <li>
+            <span>{{ token.label }}</span
+            ><code>{{ token.value }}</code>
+          </li>
+        }
+      </ul>
+      <p class="design-note">{{ content().design.note }}</p>
+    </div>
+
+    <div class="specimen card">
+      <div class="specimen-tabs" role="tablist" [attr.aria-label]="content().design.tabsAria">
+        @for (tab of content().design.tabs; track tab.id) {
+          <button
+            type="button"
+            role="tab"
+            [attr.aria-selected]="specimenTab() === tab.id"
+            (click)="setSpecimenTab(tab.id)"
+          >
+            {{ tab.label }}
+          </button>
+        }
+      </div>
+
+      <div class="specimen-body" role="tabpanel">
+        @switch (specimenTab()) {
+          @case ('foundations') {
+            <div class="swatch-grid">
+              @for (swatch of content().design.foundations.swatches; track swatch.name) {
+                <div class="swatch">
+                  <div class="swatch-color" [style.background]="swatch.hex"></div>
+                  <div class="swatch-meta">
+                    <span>{{ swatch.name }}</span
+                    ><code>{{ swatch.hex }}</code>
+                  </div>
+                </div>
+              }
+            </div>
+            <div class="type-specimen">
+              <p class="type-display">Aa</p>
+              <div class="type-row2">
+                <strong>{{ content().design.foundations.display }}</strong
+                ><span>{{ content().design.foundations.displayTracking }}</span>
+              </div>
+              <div class="type-row2">
+                <strong>{{ content().design.foundations.body }}</strong
+                ><span>{{ content().design.foundations.bodyTracking }}</span>
+              </div>
+              <div class="type-row2">
+                <strong>{{ content().design.foundations.mono }}</strong
+                ><span>{{ content().design.foundations.monoTracking }}</span>
+              </div>
+            </div>
+            <div class="radius-row" [attr.aria-label]="content().design.foundations.radiusAria">
+              <span class="radius-chip">4</span><span class="radius-chip">8</span
+              ><span class="radius-chip">12</span><span class="radius-chip">16</span>
+            </div>
+          }
+          @case ('components') {
+            <div class="specimen-stack" [class.is-dense]="dense()">
+              <div class="specimen-row">
+                <span>{{ content().design.components.buttonsLabel }}</span>
+                <div class="specimen-buttons">
+                  <span class="btn btn-primary">{{ content().design.components.primary }}</span>
+                  <span class="btn btn-secondary">{{
+                    content().design.components.secondary
+                  }}</span>
+                  <span class="btn btn-tertiary">{{ content().design.components.tertiary }}</span>
+                </div>
+              </div>
+              <div class="specimen-row">
+                <span>{{ content().design.components.inputLabel }}</span>
+                <div class="field">
+                  <label for="specimen-email">{{ content().design.components.emailLabel }}</label>
+                  <input
+                    id="specimen-email"
+                    type="email"
+                    [placeholder]="content().design.components.emailPlaceholder"
+                    (focus)="trackInputFocus()"
+                  />
+                </div>
+              </div>
+              <div class="specimen-row">
+                <span>{{ content().design.components.badgesLabel }}</span>
+                <div class="badge-row2">
+                  <span class="badge badge-live"
+                    ><span class="dot"></span>{{ content().design.components.available }}</span
+                  >
+                  <span class="badge">{{ content().design.components.draft }}</span
+                  ><span class="badge">{{ content().design.components.archived }}</span>
+                </div>
+              </div>
+              <div class="specimen-row">
+                <span>{{ content().design.components.densityLabel }}</span>
+                <button
+                  class="switch"
+                  type="button"
+                  role="switch"
+                  [attr.aria-checked]="dense()"
+                  (click)="toggleDensity()"
+                >
+                  <span class="switch-track"><span class="switch-thumb"></span></span>
+                  <span>{{ content().design.components.compact }}</span>
+                </button>
+              </div>
+              <div class="specimen-card-demo">
+                <strong>{{ content().design.components.cardTitle }}</strong>
+                <span>{{ content().design.components.cardMeta }}</span>
+              </div>
+            </div>
+          }
+          @case ('motion') {
+            <div class="motion-list">
+              @for (row of content().design.motion.rows; track row.label) {
+                <div class="motion-row">
+                  <span>{{ row.label }}</span
+                  ><code>{{ row.value }}</code>
+                </div>
+              }
+            </div>
+            <div class="motion-demo">
+              <div class="motion-track">
+                <span class="motion-dot" [class.is-playing]="motionPlaying()"></span>
+              </div>
+              <div class="motion-caption">
+                <span>{{ content().design.motion.reduced }}</span>
+                <button class="text-btn" type="button" (click)="replayMotion()">
+                  {{ content().design.motion.replay }}
+                </button>
+              </div>
+            </div>
+          }
+        }
+      </div>
+    </div>
+  </div>
+</section>

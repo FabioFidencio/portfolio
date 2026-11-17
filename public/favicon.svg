@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Fábio Fidencio">
+  <rect width="64" height="64" rx="14" fill="#010102"/>
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="13.25" fill="none" stroke="#23252a" stroke-width="1.5"/>
+  <path d="M23 17h20v7H31v8h10v7H31v13h-8V17z" fill="#f7f8f8"/>
+  <circle cx="46" cy="46" r="4" fill="#5e6ad2"/>
+</svg>

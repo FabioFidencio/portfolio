@@ -1,0 +1,75 @@
+@let item = project();
+
+<div class="modal-backdrop" (click)="requestClose('backdrop')">
+  <div
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="project-dialog-title"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="modal-head">
+      <div>
+        <span class="badge">{{ item.type }}</span
+        ><span>{{ item.year }}</span>
+      </div>
+      <button
+        #dialogClose
+        class="icon-btn"
+        type="button"
+        [attr.aria-label]="content().modal.closeAria"
+        (click)="requestClose('button')"
+      >
+        ✕
+      </button>
+    </div>
+    <h2 id="project-dialog-title">{{ item.name }} — {{ item.subtitle }}</h2>
+    <p class="modal-summary">{{ item.summary }}</p>
+    <div class="modal-meta">
+      <div>
+        <span>{{ content().modal.role }}</span
+        ><strong>{{ item.role }}</strong>
+      </div>
+      <div>
+        <span>{{ content().modal.stack }}</span
+        ><strong>{{ item.stack.join(' · ') }}</strong>
+      </div>
+      <div>
+        <span>{{ content().modal.year }}</span
+        ><strong>{{ item.year }}</strong>
+      </div>
+    </div>
+    <h3>{{ content().modal.challenge }}</h3>
+    <p>{{ item.challenge }}</p>
+    <h3>{{ content().modal.whatIDid }}</h3>
+    <ul>
+      @for (step of item.approach; track step) {
+        <li>{{ step }}</li>
+      }
+    </ul>
+    <div class="modal-results">
+      @for (result of item.results; track result.label) {
+        <div>
+          <strong>{{ result.value }}</strong
+          ><span>{{ result.label }}</span>
+        </div>
+      }
+    </div>
+    <div class="modal-foot">
+      <span>{{ content().modal.fullWalkthrough }}</span>
+      <div class="modal-actions">
+        <a
+          class="btn btn-tertiary project-repo"
+          [href]="item.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          (click)="trackRepo()"
+          >{{ content().work.viewRepo }} <span aria-hidden="true">↗</span></a
+        >
+        <a class="btn btn-primary" [href]="mailtoHref()" (click)="trackAsk()"
+          >{{ content().modal.askAbout }} {{ item.name }} <span aria-hidden="true">→</span></a
+        >
+      </div>
+    </div>
+  </div>
+</div>

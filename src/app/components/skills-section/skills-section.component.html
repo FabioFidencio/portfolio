@@ -1,0 +1,48 @@
+<section id="skills" class="section skills" aria-labelledby="skills-heading">
+  <div class="container skills-layout">
+    <div class="skills-copy">
+      <p class="eyebrow">{{ content().skills.eyebrow }}</p>
+      <h2 id="skills-heading">
+        {{ content().skills.heading }} <span>{{ content().skills.headingMuted }}</span>
+      </h2>
+      <p>{{ content().skills.body }}</p>
+      <div class="learning-card card">
+        <p class="eyebrow">{{ content().skills.learningEyebrow }}</p>
+        <p>{{ content().skills.learningBody }}</p>
+      </div>
+    </div>
+
+    <div class="skills-panel">
+      <div class="filter-row" role="group" [attr.aria-label]="content().skills.filterAria">
+        @for (filter of content().skills.filters; track filter.id) {
+          <button
+            class="filter-pill"
+            type="button"
+            [class.is-active]="skillFilter() === filter.id"
+            [attr.aria-pressed]="skillFilter() === filter.id"
+            (click)="setFilter(filter.id)"
+          >
+            {{ filter.label }}
+          </button>
+        }
+      </div>
+
+      <div class="skill-list">
+        @for (skill of filteredSkills(); track skill.name) {
+          <article class="skill-row">
+            <div class="skill-top">
+              <h3>{{ skill.name }}</h3>
+              <span class="skill-tag">{{ content().skills.categories[skill.category] }}</span>
+            </div>
+            <p>{{ skill.detail }}</p>
+            <div class="skill-meter" aria-hidden="true">
+              <span [style.width.%]="skill.level"></span>
+            </div>
+          </article>
+        } @empty {
+          <p class="empty-state">{{ content().skills.empty }}</p>
+        }
+      </div>
+    </div>
+  </div>
+</section>

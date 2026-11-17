@@ -1,0 +1,51 @@
+<section id="contact" class="contact-section" aria-labelledby="contact-heading">
+  <div class="container">
+    <div class="cta-banner">
+      <div class="cta-copy">
+        <p class="eyebrow">{{ content().contact.eyebrow }}</p>
+        <h2 id="contact-heading">{{ content().contact.heading }}</h2>
+        <p>{{ content().contact.body }}</p>
+      </div>
+      <div class="cta-actions">
+        <a
+          class="btn btn-primary"
+          [href]="gmail(content().contact.emailSubject)"
+          target="_blank"
+          rel="noopener noreferrer"
+          (click)="trackEmail()"
+          >{{ content().contact.emailCta }} <span aria-hidden="true">↗</span></a
+        >
+        <button class="btn btn-secondary" type="button" (click)="copyEmail()">
+          {{ copied() ? content().contact.copied : content().contact.copyEmail }}
+        </button>
+        <span class="copy-status" aria-live="polite">{{
+          copied() ? content().contact.copiedStatus : ''
+        }}</span>
+      </div>
+      <div class="cta-links">
+        <a
+          [href]="profile().github"
+          target="_blank"
+          rel="noopener noreferrer"
+          (click)="trackSocial('github')"
+          >{{ content().contact.github }} <span aria-hidden="true">↗</span></a
+        >
+        <a
+          [href]="profile().linkedin"
+          target="_blank"
+          rel="noopener noreferrer"
+          (click)="trackSocial('linkedin')"
+          >{{ content().contact.linkedin }} <span aria-hidden="true">↗</span></a
+        >
+        <a
+          [href]="gmail(content().contact.emailSubject)"
+          target="_blank"
+          rel="noopener noreferrer"
+          (click)="trackEmail()"
+          >{{ content().contact.email }} <span aria-hidden="true">↗</span></a
+        >
+        <span class="cta-email">{{ profile().email }}</span>
+      </div>
+    </div>
+  </div>
+</section>

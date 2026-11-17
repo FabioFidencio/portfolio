@@ -1,0 +1,64 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a
+        class="wordmark"
+        href="#home"
+        (click)="trackNav('home')"
+        [attr.aria-label]="profile().name + ' — ' + content().ui.homeAria"
+        >{{ profile().shortName }}<span>.</span></a
+      >
+      <p>{{ content().footer.bio }}</p>
+      <span class="footer-status">
+        <span class="status-dot" aria-hidden="true"></span>{{ profile().availability }}
+      </span>
+    </div>
+
+    <nav class="footer-col" [attr.aria-label]="content().ui.footerNav">
+      <h3>{{ content().footer.explore }}</h3>
+      @for (item of navItems(); track item.id) {
+        <a [href]="'#' + item.id" (click)="trackNav(item.id)">{{ item.label }}</a>
+      }
+    </nav>
+
+    <div class="footer-col">
+      <h3>{{ content().footer.elsewhere }}</h3>
+      <a
+        [href]="profile().github"
+        target="_blank"
+        rel="noopener noreferrer"
+        (click)="trackSocial('github')"
+        >{{ content().contact.github }} ↗</a
+      >
+      <a
+        [href]="profile().linkedin"
+        target="_blank"
+        rel="noopener noreferrer"
+        (click)="trackSocial('linkedin')"
+        >{{ content().contact.linkedin }} ↗</a
+      >
+      <a
+        [href]="gmail(content().contact.emailSubject)"
+        target="_blank"
+        rel="noopener noreferrer"
+        (click)="trackSocial('email')"
+        >{{ content().contact.email }} ↗</a
+      >
+    </div>
+
+    <div class="footer-col">
+      <h3>{{ content().footer.builtWith }}</h3>
+      <p>
+        @for (line of content().footer.builtWithLines; track line) {
+          {{ line }}<br />
+        }
+      </p>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <span>© {{ currentYear }} {{ profile().name }}. {{ content().footer.rights }}</span>
+    <span>{{ content().footer.designed }}</span>
+    <a href="#home" (click)="trackBackToTop()">{{ content().footer.backToTop }}</a>
+  </div>
+</footer>

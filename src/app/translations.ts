@@ -34,8 +34,7 @@ const en = {
     menuOpen: 'Open menu',
     menuClose: 'Close menu',
     resume: 'Résumé',
-    resumeSubject: 'Résumé request',
-    requestResume: 'Request résumé',
+    requestResume: 'Download résumé',
     letsTalk: 'Let’s talk',
     language: 'Language',
     english: 'English',
@@ -53,6 +52,7 @@ const en = {
     { id: 'work', label: 'Work' },
     { id: 'skills', label: 'Skills' },
     { id: 'engineering', label: 'Engineering' },
+    { id: 'analytics', label: 'Analytics' },
     { id: 'design', label: 'Design' },
     { id: 'experience', label: 'Experience' },
   ] as NavItem[],
@@ -186,7 +186,7 @@ const en = {
     body: 'From the first semantic element to the final responsive detail, I care about how the whole thing comes together — and how it behaves when a real person uses it.',
     learningEyebrow: 'Currently exploring',
     learningBody:
-      'Angular SSR & hydration, view transitions, and Web Components as a shared primitive.',
+      'Angular SSR & hydration, view transitions, Web Components as a shared primitive, and LLM-assisted delivery workflows.',
     filterAria: 'Filter skills by category',
     filters: [
       { id: 'all', label: 'All' },
@@ -194,12 +194,16 @@ const en = {
       { id: 'language', label: 'Languages' },
       { id: 'craft', label: 'Craft' },
       { id: 'quality', label: 'Quality' },
+      { id: 'data', label: 'Data' },
+      { id: 'ai', label: 'AI' },
     ] as SkillFilterOption[],
     categories: {
       framework: 'Framework',
       language: 'Language',
       craft: 'Craft',
       quality: 'Quality',
+      data: 'Data',
+      ai: 'AI',
     } as Record<SkillCategory, string>,
     items: [
       {
@@ -221,6 +225,18 @@ const en = {
         level: 80,
       },
       {
+        name: 'AngularJS & ExtJS',
+        detail: 'Legacy application maintenance, reusable components, REST and WebSocket integrations',
+        category: 'framework',
+        level: 70,
+      },
+      {
+        name: 'Ionic',
+        detail: 'Hybrid mobile interfaces on top of Angular and Vue codebases',
+        category: 'framework',
+        level: 68,
+      },
+      {
         name: 'TypeScript',
         detail: 'Strict types, generics, discriminated unions, utility types, safe refactors',
         category: 'language',
@@ -231,6 +247,18 @@ const en = {
         detail: 'Semantic markup, CSS Grid, container queries, custom properties, design tokens',
         category: 'language',
         level: 94,
+      },
+      {
+        name: 'Java',
+        detail: 'Object-oriented fundamentals, coursework, and academic projects',
+        category: 'language',
+        level: 72,
+      },
+      {
+        name: 'Python',
+        detail: 'Scripting, data exercises, automation, and coursework',
+        category: 'language',
+        level: 74,
       },
       {
         name: 'RxJS',
@@ -280,6 +308,26 @@ const en = {
         detail: 'Angular CLI, Vite/esbuild, Git, CI checks, linting, formatting',
         category: 'craft',
         level: 86,
+      },
+      {
+        name: 'SQL & data modeling',
+        detail: 'PostgreSQL, Google BigQuery, Firebase, relational modeling, queries, and migrations',
+        category: 'data',
+        level: 78,
+      },
+      {
+        name: 'AI-assisted development',
+        detail:
+          'Copilot, ChatGPT, and Claude for scaffolding, refactors, reviews, and test generation — always verified',
+        category: 'ai',
+        level: 86,
+      },
+      {
+        name: 'Prompt & context design',
+        detail:
+          'Spec-driven prompts, reusable context, structured output checks, and correcting model mistakes',
+        category: 'ai',
+        level: 82,
       },
     ] as Skill[],
     empty: 'No skills in this category yet.',
@@ -395,6 +443,39 @@ const en = {
       },
     ] as Principle[],
   },
+  analytics: {
+    eyebrow: 'Instrumentation',
+    index: '03',
+    heading: 'Measured,',
+    headingMuted: 'not guessed.',
+    lede: 'Google Analytics 4 is wired into every component on this page. The panel below is fed by the same service that sends events to GA4 — switch a tab, filter a skill, or copy my email and watch the event land.',
+    live: 'Live',
+    measurementLabel: 'Measurement ID',
+    metricPageViews: 'Page views',
+    metricEvents: 'Events',
+    metricComponents: 'Components',
+    metricLocale: 'Locale',
+    statusLocal: 'Local mode',
+    statusLoading: 'Connecting',
+    statusReady: 'Connected',
+    statusError: 'Offline',
+    componentsTitle: 'Component views',
+    componentsHint: 'section_view · component',
+    eventsTitle: 'Session events',
+    reset: 'Clear log',
+    empty: 'No events yet — interact with the page.',
+    codeCaption:
+      'Each component injects the service, announces itself on creation, and tracks the interactions that matter.',
+    transportLabel: 'Transport',
+    storageLabel: 'Buffer',
+    transportGa: 'gtag.js → GA4',
+    transportLocal: 'In-memory',
+    storageLocal: 'Last 200 events',
+    localNote:
+      'Local mode: add your GA4 Measurement ID in src/app/core/analytics.config.ts to stream these events to Google Analytics.',
+    privacyNote:
+      'Content is tracked without cookies: only component names, event names, and interface actions are recorded here.',
+  },
   design: {
     eyebrow: 'Design system',
     heading: 'A system,',
@@ -459,10 +540,10 @@ const en = {
   },
   experience: {
     eyebrow: 'Experience',
-    index: '03',
+    index: '04',
     heading: 'Learning by',
     headingMuted: 'building.',
-    lede: 'Where I have been building: independent projects, the code behind them, and the stack I use.',
+    lede: 'From my first frontend role at CISS in 2017 to shipping my own apps today — including the years I was studying software engineering while working outside tech.',
     currentLabel: 'Current',
     jobs: [
       {
@@ -479,6 +560,48 @@ const en = {
         ],
         tags: ['React Native', 'Vue', 'Angular', 'TypeScript'],
       },
+      {
+        period: '2025 — 2026',
+        role: 'Cashier',
+        org: 'Ítalo Supermercado',
+        summary:
+          'The day job that kept things running while I built software on the side and studied — until March 2026.',
+        points: [
+          'Opened, closed, and reconciled the till with accurate cash handling.',
+          'Registered products and processed payments quickly during peak hours.',
+          'Resolved customer issues at the counter with patience and clear communication.',
+        ],
+        tags: ['Customer service', 'Cash handling', 'Operations'],
+      },
+      {
+        period: '2019 — 2025',
+        role: 'Administrator',
+        org: 'Eletrisul Auto Elétrica',
+        summary:
+          'Ran an auto-electric business while studying Software Engineering at UTFPR — the years outside tech that funded my way back into development.',
+        points: [
+          'Managed the full financial cycle: cash flow, invoicing, and collections.',
+          'Owned inventory control and supplier relationships.',
+          'Supervised day-to-day operations and the services delivered to customers.',
+          'Handled sales, customer service, and general business administration.',
+        ],
+        tags: ['Operations', 'Finance', 'Inventory'],
+      },
+      {
+        period: '2017 — 2018',
+        role: 'Frontend developer (intern → developer)',
+        org: 'CISS',
+        summary:
+          'Built and maintained web applications with ExtJS and AngularJS, including real-time delivery tracking and usage analytics.',
+        points: [
+          'Implemented push notifications for real-time delivery tracking.',
+          'Integrated Google Analytics to monitor access, clicks, and engagement.',
+          'Created reusable, responsive components following internal design standards.',
+          'Integrated REST APIs and WebSockets for live data.',
+          'Worked in agile sprints with code reviews and shared quality standards.',
+        ],
+        tags: ['ExtJS', 'AngularJS', 'REST', 'WebSocket', 'Google Analytics'],
+      },
     ] as ExperienceRow[],
     hire: {
       headingLine1: 'Frontend',
@@ -487,10 +610,14 @@ const en = {
       locationLabel: 'Location',
       focusLabel: 'Focus',
       startLabel: 'Start',
+      educationLabel: 'Education',
+      languagesLabel: 'Languages',
       contactLabel: 'Contact',
-      focus: 'Angular · TypeScript · React Native · Vue',
+      focus: 'Angular · TypeScript · React Native · Vue · AI-assisted delivery',
       start: 'Available now',
-      resume: 'Request résumé',
+      education: 'B.Sc. Software Engineering · UTFPR (expected 2027)',
+      languages: 'Portuguese (native) · English C2 (EF SET)',
+      resume: 'Download résumé',
       note: 'References available on request.',
     },
   },
@@ -502,7 +629,7 @@ const en = {
     copyEmail: 'Copy email',
     copied: 'Email copied',
     copiedStatus: 'Copied to clipboard',
-    emailSubject: 'Hello',
+    emailSubject: 'Work partnership',
     github: 'GitHub',
     linkedin: 'LinkedIn',
     email: 'Email',
@@ -589,8 +716,7 @@ const ptBR: typeof en = {
     menuOpen: 'Abrir menu',
     menuClose: 'Fechar menu',
     resume: 'Currículo',
-    resumeSubject: 'Solicitação de currículo',
-    requestResume: 'Solicitar currículo',
+    requestResume: 'Baixar currículo',
     letsTalk: 'Vamos conversar',
     language: 'Idioma',
     english: 'English',
@@ -608,6 +734,7 @@ const ptBR: typeof en = {
     { id: 'work', label: 'Projetos' },
     { id: 'skills', label: 'Competências' },
     { id: 'engineering', label: 'Engenharia' },
+    { id: 'analytics', label: 'Métricas' },
     { id: 'design', label: 'Design' },
     { id: 'experience', label: 'Experiência' },
   ] as NavItem[],
@@ -741,7 +868,7 @@ const ptBR: typeof en = {
     body: 'Do primeiro elemento semântico ao último detalhe responsivo, me importo com como tudo se encaixa — e com como se comporta quando uma pessoa real usa.',
     learningEyebrow: 'Explorando agora',
     learningBody:
-      'SSR e hidratação no Angular, view transitions e Web Components como primitiva compartilhada.',
+      'SSR e hidratação no Angular, view transitions, Web Components como primitiva compartilhada e fluxos de entrega assistidos por LLM.',
     filterAria: 'Filtrar competências por categoria',
     filters: [
       { id: 'all', label: 'Todas' },
@@ -749,12 +876,16 @@ const ptBR: typeof en = {
       { id: 'language', label: 'Linguagens' },
       { id: 'craft', label: 'Prática' },
       { id: 'quality', label: 'Qualidade' },
+      { id: 'data', label: 'Dados' },
+      { id: 'ai', label: 'IA' },
     ] as SkillFilterOption[],
     categories: {
       framework: 'Framework',
       language: 'Linguagem',
       craft: 'Prática',
       quality: 'Qualidade',
+      data: 'Dados',
+      ai: 'IA',
     } as Record<SkillCategory, string>,
     items: [
       {
@@ -778,6 +909,19 @@ const ptBR: typeof en = {
         level: 80,
       },
       {
+        name: 'AngularJS & ExtJS',
+        detail:
+          'Manutenção de aplicações legadas, componentes reutilizáveis, integrações REST e WebSocket',
+        category: 'framework',
+        level: 70,
+      },
+      {
+        name: 'Ionic',
+        detail: 'Interfaces mobile híbridas sobre bases Angular e Vue',
+        category: 'framework',
+        level: 68,
+      },
+      {
         name: 'TypeScript',
         detail:
           'Tipos estritos, generics, uniões discriminadas, utility types, refatorações seguras',
@@ -790,6 +934,18 @@ const ptBR: typeof en = {
           'Marcação semântica, CSS Grid, container queries, propriedades customizadas, design tokens',
         category: 'language',
         level: 94,
+      },
+      {
+        name: 'Java',
+        detail: 'Fundamentos de orientação a objetos, disciplinas e projetos acadêmicos',
+        category: 'language',
+        level: 72,
+      },
+      {
+        name: 'Python',
+        detail: 'Scripts, exercícios com dados, automação e disciplinas da graduação',
+        category: 'language',
+        level: 74,
       },
       {
         name: 'RxJS',
@@ -841,6 +997,27 @@ const ptBR: typeof en = {
         detail: 'Angular CLI, Vite/esbuild, Git, checks de CI, lint, formatação',
         category: 'craft',
         level: 86,
+      },
+      {
+        name: 'SQL e modelagem de dados',
+        detail:
+          'PostgreSQL, Google BigQuery, Firebase, modelagem relacional, consultas e migrações',
+        category: 'data',
+        level: 78,
+      },
+      {
+        name: 'Desenvolvimento assistido por IA',
+        detail:
+          'Copilot, ChatGPT e Claude para scaffolding, refatorações, revisões e testes — sempre verificados',
+        category: 'ai',
+        level: 86,
+      },
+      {
+        name: 'Prompt e design de contexto',
+        detail:
+          'Prompts orientados a especificação, contexto reutilizável, validação de saída e correção de erros do modelo',
+        category: 'ai',
+        level: 82,
       },
     ] as Skill[],
     empty: 'Ainda não há competências nesta categoria.',
@@ -956,6 +1133,39 @@ const ptBR: typeof en = {
       },
     ] as Principle[],
   },
+  analytics: {
+    eyebrow: 'Instrumentação',
+    index: '03',
+    heading: 'Medido,',
+    headingMuted: 'não adivinhado.',
+    lede: 'O Google Analytics 4 está conectado a cada componente desta página. O painel abaixo usa o mesmo serviço que envia eventos ao GA4 — troque uma aba, filtre uma competência ou copie meu e-mail e veja o evento aparecer.',
+    live: 'Ao vivo',
+    measurementLabel: 'Measurement ID',
+    metricPageViews: 'Page views',
+    metricEvents: 'Eventos',
+    metricComponents: 'Componentes',
+    metricLocale: 'Idioma',
+    statusLocal: 'Modo local',
+    statusLoading: 'Conectando',
+    statusReady: 'Conectado',
+    statusError: 'Offline',
+    componentsTitle: 'Views por componente',
+    componentsHint: 'section_view · component',
+    eventsTitle: 'Eventos da sessão',
+    reset: 'Limpar registro',
+    empty: 'Nenhum evento ainda — interaja com a página.',
+    codeCaption:
+      'Cada componente injeta o serviço, se anuncia ao ser criado e registra as interações que importam.',
+    transportLabel: 'Transporte',
+    storageLabel: 'Buffer',
+    transportGa: 'gtag.js → GA4',
+    transportLocal: 'Em memória',
+    storageLocal: 'Últimos 200 eventos',
+    localNote:
+      'Modo local: adicione seu Measurement ID do GA4 em src/app/core/analytics.config.ts para enviar estes eventos ao Google Analytics.',
+    privacyNote:
+      'O conteúdo é rastreado sem cookies: apenas nomes de componentes, eventos e ações de interface são registrados aqui.',
+  },
   design: {
     eyebrow: 'Design system',
     heading: 'Um sistema,',
@@ -1020,10 +1230,10 @@ const ptBR: typeof en = {
   },
   experience: {
     eyebrow: 'Experiência',
-    index: '03',
+    index: '04',
     heading: 'Aprendendo',
     headingMuted: 'construindo.',
-    lede: 'Onde tenho construído: projetos independentes, o código por trás deles e a stack que uso.',
+    lede: 'Do meu primeiro papel em frontend na CISS, em 2017, aos meus próprios apps hoje — incluindo os anos em que estudei engenharia de software trabalhando fora da área.',
     currentLabel: 'Atual',
     jobs: [
       {
@@ -1040,6 +1250,48 @@ const ptBR: typeof en = {
         ],
         tags: ['React Native', 'Vue', 'Angular', 'TypeScript'],
       },
+      {
+        period: '2025 — 2026',
+        role: 'Operador de caixa',
+        org: 'Ítalo Supermercado',
+        summary:
+          'O trabalho que manteve as contas em dia enquanto eu construía software nas horas vagas e estudava — até março de 2026.',
+        points: [
+          'Realizei abertura, fechamento e conferência de caixa com manuseio preciso de valores.',
+          'Registrei produtos e processei pagamentos com agilidade nos horários de pico.',
+          'Resolvi problemas com clientes no balcão, com paciência e comunicação clara.',
+        ],
+        tags: ['Atendimento', 'Caixa', 'Operação'],
+      },
+      {
+        period: '2019 — 2025',
+        role: 'Administrador',
+        org: 'Eletrisul Auto Elétrica',
+        summary:
+          'Administrei uma autoelétrica enquanto cursava Engenharia de Software na UTFPR — os anos fora da área que financiaram meu retorno ao desenvolvimento.',
+        points: [
+          'Gestão do ciclo financeiro completo: fluxo de caixa, cobrança e faturamento.',
+          'Controle de estoque e relacionamento com fornecedores.',
+          'Supervisão da operação diária e dos serviços prestados aos clientes.',
+          'Atendimento, vendas e administração geral do negócio.',
+        ],
+        tags: ['Operação', 'Financeiro', 'Estoque'],
+      },
+      {
+        period: '2017 — 2018',
+        role: 'Desenvolvedor frontend (estágio → efetivo)',
+        org: 'CISS',
+        summary:
+          'Desenvolvi e mantive aplicações web com ExtJS e AngularJS, incluindo rastreio de entregas em tempo real e análise de uso.',
+        points: [
+          'Implementei notificações push para acompanhamento de entregas em tempo real.',
+          'Integrei o Google Analytics para monitorar acessos, cliques e engajamento.',
+          'Criei componentes reutilizáveis e responsivos seguindo padrões internos de design.',
+          'Integrei APIs REST e WebSockets para dados em tempo real.',
+          'Atuei em sprints ágeis, com code reviews e padrões de qualidade compartilhados.',
+        ],
+        tags: ['ExtJS', 'AngularJS', 'REST', 'WebSocket', 'Google Analytics'],
+      },
     ] as ExperienceRow[],
     hire: {
       headingLine1: 'Vagas em',
@@ -1048,10 +1300,14 @@ const ptBR: typeof en = {
       locationLabel: 'Localização',
       focusLabel: 'Foco',
       startLabel: 'Início',
+      educationLabel: 'Formação',
+      languagesLabel: 'Idiomas',
       contactLabel: 'Contato',
-      focus: 'Angular · TypeScript · React Native · Vue',
+      focus: 'Angular · TypeScript · React Native · Vue · entrega assistida por IA',
       start: 'Disponível agora',
-      resume: 'Solicitar currículo',
+      education: 'Bacharelado em Engenharia de Software · UTFPR (previsão 2027)',
+      languages: 'Português (nativo) · Inglês C2 (EF SET)',
+      resume: 'Baixar currículo',
       note: 'Referências disponíveis sob solicitação.',
     },
   },
@@ -1063,7 +1319,7 @@ const ptBR: typeof en = {
     copyEmail: 'Copiar e-mail',
     copied: 'E-mail copiado',
     copiedStatus: 'Copiado para a área de transferência',
-    emailSubject: 'Olá',
+    emailSubject: 'Parceria de trabalho',
     github: 'GitHub',
     linkedin: 'LinkedIn',
     email: 'E-mail',

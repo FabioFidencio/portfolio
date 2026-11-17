@@ -1,0 +1,105 @@
+<section id="experience" class="section" aria-labelledby="experience-heading">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">
+          {{ content().experience.eyebrow }}
+          <span class="index">{{ content().experience.index }}</span>
+        </p>
+        <h2 id="experience-heading">
+          {{ content().experience.heading }}
+          <span>{{ content().experience.headingMuted }}</span>
+        </h2>
+      </div>
+      <p class="section-lede">{{ content().experience.lede }}</p>
+    </div>
+
+    <div class="experience-grid">
+      <div class="timeline">
+        @for (job of content().experience.jobs; track job.period) {
+          <article class="timeline-row">
+            <div class="timeline-period">
+              <span>{{ job.period }}</span>
+              @if (job.current) {
+                <span class="badge badge-live"
+                  ><span class="dot"></span>{{ content().experience.currentLabel }}</span
+                >
+              }
+            </div>
+            <div class="timeline-body">
+              <h3>{{ job.role }}</h3>
+              <p class="timeline-org">{{ job.org }}</p>
+              <p>{{ job.summary }}</p>
+              <ul>
+                @for (point of job.points; track point) {
+                  <li>{{ point }}</li>
+                }
+              </ul>
+              <div class="tag-list">
+                @for (tag of job.tags; track tag) {
+                  <span>{{ tag }}</span>
+                }
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+
+      <aside class="hire-card card" aria-labelledby="hire-heading">
+        <p class="hire-status">
+          <span class="status-dot" aria-hidden="true"></span>{{ profile().availability }}
+        </p>
+        <h3 id="hire-heading">
+          {{ content().experience.hire.headingLine1 }}<br />{{
+            content().experience.hire.headingLine2
+          }}
+        </h3>
+        <p>{{ content().experience.hire.body }}</p>
+        <dl class="hire-list">
+          <div>
+            <dt>{{ content().experience.hire.locationLabel }}</dt>
+            <dd>{{ profile().location }}</dd>
+          </div>
+          <div>
+            <dt>{{ content().experience.hire.focusLabel }}</dt>
+            <dd>{{ content().experience.hire.focus }}</dd>
+          </div>
+          <div>
+            <dt>{{ content().experience.hire.startLabel }}</dt>
+            <dd>{{ content().experience.hire.start }}</dd>
+          </div>
+          <div>
+            <dt>{{ content().experience.hire.educationLabel }}</dt>
+            <dd>{{ content().experience.hire.education }}</dd>
+          </div>
+          <div>
+            <dt>{{ content().experience.hire.languagesLabel }}</dt>
+            <dd>{{ content().experience.hire.languages }}</dd>
+          </div>
+          <div>
+            <dt>{{ content().experience.hire.contactLabel }}</dt>
+            <dd>
+              <a
+                [href]="gmail(content().contact.emailSubject)"
+                target="_blank"
+                rel="noopener noreferrer"
+                (click)="trackEmail()"
+                >{{ profile().email }}</a
+              >
+            </dd>
+          </div>
+        </dl>
+        <a
+          class="btn btn-primary"
+          [href]="resume.href"
+          [attr.download]="resume.fileName"
+          target="_blank"
+          rel="noopener noreferrer"
+          (click)="trackResume()"
+          >{{ content().experience.hire.resume }} <span aria-hidden="true">↓</span></a
+        >
+        <p class="hire-note">{{ content().experience.hire.note }}</p>
+      </aside>
+    </div>
+  </div>
+</section>

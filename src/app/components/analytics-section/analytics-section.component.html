@@ -1,0 +1,129 @@
+<section id="analytics" class="section analytics" aria-labelledby="analytics-heading">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">
+          {{ content().analytics.eyebrow }}
+          <span class="index">{{ content().analytics.index }}</span>
+        </p>
+        <h2 id="analytics-heading">
+          {{ content().analytics.heading }}
+          <span>{{ content().analytics.headingMuted }}</span>
+        </h2>
+      </div>
+      <p class="section-lede">{{ content().analytics.lede }}</p>
+    </div>
+
+    <div class="analytics-layout">
+      <div class="analytics-panel card">
+        <div class="analytics-top">
+          <span class="badge analytics-live"
+            ><span class="dot" aria-hidden="true"></span>{{ content().analytics.live }}</span
+          >
+          <span class="analytics-id">
+            <span>{{ content().analytics.measurementLabel }}</span>
+            <code>{{ analytics.measurementId }}</code>
+          </span>
+          <span class="badge analytics-status" [class.is-ready]="statusReady()">{{
+            statusLabel()
+          }}</span>
+        </div>
+
+        <div class="analytics-metrics">
+          <div class="analytics-metric">
+            <span>{{ content().analytics.metricPageViews }}</span>
+            <strong>{{ analytics.pageViews() }}</strong>
+            <em>page_view</em>
+          </div>
+          <div class="analytics-metric">
+            <span>{{ content().analytics.metricEvents }}</span>
+            <strong>{{ analytics.totalEvents() }}</strong>
+            <em>gtag event</em>
+          </div>
+          <div class="analytics-metric">
+            <span>{{ content().analytics.metricComponents }}</span>
+            <strong>{{ analytics.trackedComponents() }}</strong>
+            <em>section_view</em>
+          </div>
+          <div class="analytics-metric">
+            <span>{{ content().analytics.metricLocale }}</span>
+            <strong>{{ locale() }}</strong>
+            <em>language</em>
+          </div>
+        </div>
+
+        <div class="analytics-block">
+          <div class="analytics-block-head">
+            <span>{{ content().analytics.componentsTitle }}</span>
+            <code>{{ content().analytics.componentsHint }}</code>
+          </div>
+          <ul class="analytics-component-list">
+            @for (row of componentRows(); track row.name) {
+              <li class="analytics-component">
+                <span class="analytics-component-name">{{ row.name }}</span>
+                <span class="analytics-bar" aria-hidden="true"
+                  ><i [style.width.%]="row.width"></i
+                ></span>
+                <span class="analytics-count">{{ row.count }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+
+        <div class="analytics-block analytics-events">
+          <div class="analytics-block-head">
+            <span>{{ content().analytics.eventsTitle }}</span>
+            <button class="text-btn" type="button" (click)="reset()">
+              {{ content().analytics.reset }}
+            </button>
+          </div>
+          <div class="analytics-event-list">
+            @for (event of recentEvents(); track event.id) {
+              <div class="analytics-event">
+                <time [attr.datetime]="isoTimestamp(event.timestamp)">{{ formatTime(event.timestamp) }}</time>
+                <span class="analytics-event-name"
+                  >{{ event.name }}<span>{{ event.component }}</span></span
+                >
+                <code class="analytics-event-params">{{ describe(event) }}</code>
+              </div>
+            } @empty {
+              <p class="analytics-empty">{{ content().analytics.empty }}</p>
+            }
+          </div>
+        </div>
+
+        @if (!analytics.configured) {
+          <p class="analytics-note">{{ content().analytics.localNote }}</p>
+        }
+      </div>
+
+      <aside class="analytics-code-card card">
+        <div class="code-head">
+          <span class="code-file">analytics.service.ts</span>
+          <span class="badge">TypeScript</span>
+        </div>
+        <div class="analytics-code-body">
+          <p class="code-desc">{{ content().analytics.codeCaption }}</p>
+          <pre class="analytics-code"><code>{{ codeSample }}</code></pre>
+          <dl class="analytics-transport">
+            <div>
+              <dt>{{ content().analytics.transportLabel }}</dt>
+              <dd>
+                {{
+                  analytics.configured
+                    ? content().analytics.transportGa
+                    : content().analytics.transportLocal
+                }}
+              </dd>
+            </div>
+            <div>
+              <dt>{{ content().analytics.storageLabel }}</dt>
+              <dd>{{ content().analytics.storageLocal }}</dd>
+            </div>
+          </dl>
+          <p class="analytics-privacy">{{ content().analytics.privacyNote }}</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

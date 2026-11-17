@@ -1,0 +1,8 @@
+<section class="stack-strip" [attr.aria-label]="content().stack.label">
+  <div class="container stack-inner">
+    <span class="stack-label">{{ content().stack.label }}</span>
+    @for (item of content().stack.items; track item) {
+      <span class="stack-item">{{ item }}</span>
+    }
+  </div>
+</section>
